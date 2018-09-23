@@ -18,3 +18,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('/register', 'Api\AuthController@register');
+
+Route::group(['middleware' => 'auth:api'], function () {
+    Route::group(['prefix' => 'appointment'], function () {
+        Route::get('/index', [
+            'uses' => 'AppointmentController@index',
+            'as'   => 'appointment.index'
+        ]);
+    });
+});
