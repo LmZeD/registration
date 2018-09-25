@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Services\Appointment\IndexService;
 use Illuminate\Http\Request;
 
 class AppointmentController extends Controller
 {
-    public function index()
+    public function index(IndexService $indexService)
     {
-        return response('Success', 200);
+        return $indexService->indexAction();
     }
 }
