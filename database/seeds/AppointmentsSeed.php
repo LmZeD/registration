@@ -20,7 +20,7 @@ class AppointmentsSeed extends Seeder
             'related_github_issue'          => 'None',
             'requested_appointment_user_id' => 1,
             'appointment_to_user_id'        => 5,
-            'start_at'                      => $carbon->nextWeekday()->toDateTimeString(),
+            'starts_at'                      => $carbon->nextWeekday()->toDateTimeString(),
             'ends_at'                       => $carbon->nextWeekday()->addHour(2)->toDateTimeString()
         ]);
 
@@ -31,7 +31,7 @@ class AppointmentsSeed extends Seeder
             'related_github_issue'          => 'none',
             'requested_appointment_user_id' => 1,
             'appointment_to_user_id'        => 3,
-            'start_at'                      => $carbon->nextWeekday()->toDateTimeString(),
+            'starts_at'                      => $carbon->nextWeekday()->toDateTimeString(),
             'ends_at'                       => $carbon->nextWeekday()->addHour(1)->toDateTimeString()
         ]);
 
@@ -42,7 +42,7 @@ class AppointmentsSeed extends Seeder
             'related_github_issue'          => ':sadpepe:',
             'requested_appointment_user_id' => 3,
             'appointment_to_user_id'        => 2,
-            'start_at'                      => $carbon->nextWeekday()->addDay(1)->toDateTimeString(),
+            'starts_at'                      => $carbon->nextWeekday()->addDay(1)->toDateTimeString(),
             'ends_at'                       => $carbon->nextWeekday()->addDay(1)->addHour(2)->toDateTimeString()
         ]);
     }

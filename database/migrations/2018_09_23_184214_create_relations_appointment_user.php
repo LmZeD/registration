@@ -14,8 +14,16 @@ class CreateRelationsAppointmentUser extends Migration
     public function up()
     {
         Schema::table('appointments', function (Blueprint $table) {
-            $table->foreign('requested_appointment_user_id')->references('id')->on('users');
-            $table->foreign('appointment_to_user_id')->references('id')->on('users');
+            $table->foreign('requested_appointment_user_id')
+                  ->references('id')
+                  ->on('users')
+                  ->onDelete('cascade')
+                  ->onUpdate('cascade');
+            $table->foreign('appointment_to_user_id')
+                  ->references('id')
+                  ->on('users')
+                  ->onDelete('cascade')
+                  ->onUpdate('cascade');
         });
     }
 
