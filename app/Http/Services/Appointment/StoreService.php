@@ -16,7 +16,11 @@ class StoreService
         $data = $this->formatData($request);
         $data['requested_appointment_user_id'] = $userId;
 
-        $response = $repository->store($data);
+        if ($data['requested_appointment_user_id'] == $data['appointment_to_user_id']) {
+            return response(json_encode(['error' => 'You can not make appointment to yourself!']));
+        } else {
+            $response = $repository->store($data);
+        }
 
         return response(json_encode(['success' => $response]), 200);
     }

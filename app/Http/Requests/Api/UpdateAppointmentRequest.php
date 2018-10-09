@@ -25,7 +25,7 @@ class UpdateAppointmentRequest extends FormRequest
     {
         return [
             'id'                      => 'required|integer|min:1',
-            'starts_at'               => 'required|date|after:now',
+            'starts_at'               => 'required|date',
             'ends_at'                 => 'required|date|after:starts_at',
             'appointment_title'       => 'required|max:255',
             'appointment_description' => 'required|max:255',

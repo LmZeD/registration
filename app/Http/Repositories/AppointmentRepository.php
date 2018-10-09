@@ -21,12 +21,21 @@ class AppointmentRepository implements AppointmentInterface
         $now = Carbon::now();
         //3 queries? Make 1 and filter in front-end?
         $upcoming = AppointmentResource::collection(Appointment::where('starts_at', '>',
-            $now->toDateTimeString())->where('deleted', '=', 0)->get());
+            $now->toDateTimeString())->where('deleted', '=', 0)->where(function ($query) use ($userId){
+            $query->where('requested_appointment_user_id', '=', $userId)->orWhere('appointment_to_user_id', '=',
+                $userId);
+        })->get());
         $ended    = AppointmentResource::collection(Appointment::where('ends_at', '<',
-            $now->toDateTimeString())->where('deleted', '=', 0)->get());
+            $now->toDateTimeString())->where('deleted', '=', 0)->where(function ($query) use ($userId){
+            $query->where('requested_appointment_user_id', '=', $userId)->orWhere('appointment_to_user_id', '=',
+                $userId);
+        })->get());
         $ongoing  = AppointmentResource::collection(Appointment::where('ends_at', '>',
             $now->toDateTimeString())->where('starts_at', '<=', $now->toDateTimeString())->where('deleted', '=',
-            0)->get());
+            0)->where(function ($query) use ($userId) {
+            $query->where('requested_appointment_user_id', '=', $userId)->orWhere('appointment_to_user_id', '=',
+                $userId);
+        })->get());
 
         return [
             'upcoming' => $upcoming,

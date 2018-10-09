@@ -30,7 +30,7 @@ Route::group(['middleware' => 'auth:api'], function () {
             'uses' => 'AppointmentController@show',
             'as'   => 'appointment.show'
         ]);
-        Route::post('/store', [
+        Route::put('/store', [
             'uses' => 'AppointmentController@store',
             'as'   => 'appointment.store'
         ]);
@@ -38,9 +38,13 @@ Route::group(['middleware' => 'auth:api'], function () {
             'uses' => 'AppointmentController@update',
             'as'   => 'appointment.update'
         ]);
-        Route::post('/destroy', [
+        Route::delete('/destroy', [
             'uses' => 'AppointmentController@destroy',
             'as'   => 'appointment.destroy'
         ]);
     });
+    Route::get('/user/all', [
+        'uses' => 'UserController@all',
+        'as'   => 'user.all'
+    ]);
 });
