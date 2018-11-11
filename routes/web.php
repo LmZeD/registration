@@ -12,9 +12,13 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return true;
 });
 
-Auth::routes();
+Route::get('/login', function () {
+    return response(json_encode(['error' => 'unauthorized']));
+})->name('login');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::any('/{any}', function ($any) {
+    return response(json_encode(['error' => 'Route does not exist']));
+})->where('any', '.*');

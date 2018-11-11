@@ -22,23 +22,23 @@ Route::post('/login', 'Api\AuthController@login');
 
 Route::group(['middleware' => 'auth:api'], function () {
     Route::group(['prefix' => 'appointment'], function () {
-        Route::get('/index', [
+        Route::get('/', [
             'uses' => 'AppointmentController@index',
             'as'   => 'appointment.index'
         ]);
-        Route::get('/show/{id}', [
+        Route::get('/{id}', [
             'uses' => 'AppointmentController@show',
             'as'   => 'appointment.show'
         ]);
-        Route::put('/store', [
+        Route::post('/', [
             'uses' => 'AppointmentController@store',
             'as'   => 'appointment.store'
         ]);
-        Route::post('/update', [
+        Route::put('/', [
             'uses' => 'AppointmentController@update',
             'as'   => 'appointment.update'
         ]);
-        Route::delete('/destroy', [
+        Route::delete('/', [
             'uses' => 'AppointmentController@destroy',
             'as'   => 'appointment.destroy'
         ]);
@@ -48,3 +48,7 @@ Route::group(['middleware' => 'auth:api'], function () {
         'as'   => 'user.all'
     ]);
 });
+
+Route::any('/{any}', function ($any) {
+    return response(json_encode(['error' => 'Route does not exist']));
+})->where('any', '.*');

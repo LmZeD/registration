@@ -13,10 +13,10 @@ return [
     */
    
     'supportsCredentials' => false,
-    'allowedOrigins' => ['localhost:3000', '127.0.0.1'],
+    'allowedOrigins' => ['localhost:3000', '127.0.0.1', '*'],
     'allowedOriginsPatterns' => [],
     'allowedHeaders' => ['*'],
-    'allowedMethods' => ['*'],
+    'allowedMethods' => ['put','*'],
     'exposedHeaders' => [],
     'maxAge' => 0,
 
