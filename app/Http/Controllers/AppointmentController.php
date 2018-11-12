@@ -31,7 +31,7 @@ class AppointmentController extends Controller
 
     public function update(UpdateAppointmentRequest $request, UpdateService $updateService)
     {
-        return $updateService->updateAction($request);
+        return $updateService->updateAction($request->toArray());
     }
 
     public function destroy(IdRequest $request, DestroyService $destroyService)

@@ -7,11 +7,11 @@ use App\Http\Requests\Api\UpdateAppointmentRequest;
 
 class UpdateService
 {
-    public function updateAction(UpdateAppointmentRequest $request)
+    public function updateAction($data)
     {
         $repository = new AppointmentRepository();
 
-        $response = $repository->update($request->toArray(), auth()->user()->id);
+        $response = $repository->update($data, auth()->user()->id);
 
         return response(json_encode(['success' => $response]), 200);
     }
