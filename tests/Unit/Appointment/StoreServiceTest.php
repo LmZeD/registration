@@ -3,6 +3,8 @@
 namespace Tests\Unit\Appointment;
 
 use App\Http\Services\Appointment\StoreService;
+use App\User;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -19,13 +21,22 @@ class StoreServiceTest extends TestCase
         $this->storeService = new StoreService();
     }
 
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
-    public function testExample()
+    public function testStoreValidData()
     {
+        $carbon = new Carbon();
+        $userId = 3;
+        auth()->setUser(User::find($userId));
+        $this->storeService->storeAction([
+            'appointment_title'             => 'Deleted',
+            'appointment_description'       => 'Deleted',
+            'location'                      => 'Linas M. table',
+            'related_github_issue'          => ':sadpepe:',
+            'requested_appointment_user_id' => 3,
+            'appointment_to_user_id'        => 2,
+            'starts_at'                     => $carbon->nextWeekday()->subMonth(),
+            'ends_at'                       => $carbon->nextWeekday()->addDay()->subMonth(),
+            'deleted'                       => 1
+        ]);
         $this->assertTrue(true);
     }
 }

@@ -43,4 +43,12 @@ class ShowServiceTest extends TestCase
         $result = $this->showService->showAction(3);
         $this->assertTrue($result->getStatusCode() == 200);
     }
+
+    public function testNonExistingAppointments()
+    {
+        $userId = 3;
+        auth()->setUser(User::find($userId));
+        $result = $this->showService->showAction(300);
+        $this->assertTrue($result->getStatusCode() == 404);
+    }
 }

@@ -8,12 +8,12 @@ use App\User;
 
 class StoreService
 {
-    public function storeAction(StoreAppointmentRequest $request)
+    public function storeAction($data)
     {
         $userId     = auth()->user()->id;
         $repository = new AppointmentRepository();
 
-        $data = $this->formatData($request);
+        $data = $this->formatData($data);
         $data['requested_appointment_user_id'] = $userId;
 
         if ($data['requested_appointment_user_id'] == $data['appointment_to_user_id']) {
@@ -25,11 +25,9 @@ class StoreService
         return response(json_encode(['success' => $response]), 200);
     }
 
-    private function formatData(StoreAppointmentRequest $request)
+    private function formatData($data)
     {
-        $data  = $request->toArray();
-        $email = $request->get('appointment_to_user');//user email
-
+        $email = $data['appointment_to_user'];//user email
         $user = User::where('email', '=', $email)->first();
 
         $data['appointment_to_user_id'] = $user['id'];

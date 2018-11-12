@@ -21,7 +21,7 @@ class AppointmentController extends Controller
 
     public function store(StoreAppointmentRequest $request, StoreService $storeService)
     {
-        return $storeService->storeAction($request);
+        return $storeService->storeAction($request->toArray());
     }
 
     public function show(Request $request, ShowService $showService)
