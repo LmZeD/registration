@@ -20,12 +20,27 @@ class ShowServiceTest extends TestCase
         $this->showService = new ShowService();
     }
 
-    public function testNoAppointments()
+    public function testNotBelongingAppointments()
     {
         $userId = 3;
         auth()->setUser(User::find($userId));
-        $result = $this->showService->showAction($userId);
-        dd($result);
+        $result = $this->showService->showAction(1);
+        $this->assertTrue($result->getStatusCode() == 403);
+    }
+
+    public function testBelongingExpiredRequestedByAppointments()
+    {
+        $userId = 3;
+        auth()->setUser(User::find($userId));
+        $result = $this->showService->showAction(4);
+        $this->assertTrue($result->getStatusCode() == 404 &&  json_decode($result->original, true)["message"] == 'Expired');
+    }
+
+    public function testBelongingNotExpiredRequestedByAppointments()
+    {
+        $userId = 3;
+        auth()->setUser(User::find($userId));
+        $result = $this->showService->showAction(3);
         $this->assertTrue($result->getStatusCode() == 200);
     }
 }
