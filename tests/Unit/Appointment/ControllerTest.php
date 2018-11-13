@@ -40,37 +40,37 @@ class ControllerTest extends TestCase
         $this->assertEquals($serviceResponse, $controllerResponse);
     }
 
-//    public function testStore()
-//    {
-//        $carbon = new Carbon();
-//        $userId = 1;
-//        auth()->setUser(User::find($userId));
-//        $service         = new StoreService();
-//        $serviceResponse = $service->storeAction([
-//            'appointment_title'             => 'Deleted',
-//            'appointment_description'       => 'Deleted',
-//            'location'                      => 'Linas M. table',
-//            'related_github_issue'          => ':sadpepe:',
-//            'appointment_to_user'           => 'kliusas@flex.com',
-//            'starts_at'                     => $carbon->nextWeekday()->toDateString(),
-//            'ends_at'                       => $carbon->nextWeekday()->subMonth()->toDateString(),
-//        ]);
-//        $request         = new StoreAppointmentRequest([
-//            [
-//                'appointment_to_user'     => 'kliusas@flex.com',
-//                'appointment_title'       => 'Deleted',
-//                'appointment_description' => 'Deleted',
-//                'location'                => 'Linas M. table',
-//                'related_github_issue'    => ':sadpepe:',
-//                'starts_at'               => $carbon->nextWeekday()->toDateString(),
-//                'ends_at'                 => $carbon->nextWeekday()->addDay()->toDateString(),
-//            ]
-//        ]);
-//        //dd($request);
-//        $controllerResponse = $this->controller->store($request, $service);
-//
-//        $this->assertEquals($serviceResponse, $controllerResponse);
-//    }
+    public function testStore()
+    {
+        $carbon = new Carbon();
+        $userId = 1;
+        auth()->setUser(User::find($userId));
+        $service         = new StoreService();
+        $serviceResponse = $service->storeAction([
+            'appointment_title'             => 'Deleted',
+            'appointment_description'       => 'Deleted',
+            'location'                      => 'Linas M. table',
+            'related_github_issue'          => ':sadpepe:',
+            'appointment_to_user'           => 'kliusas@flex.com',
+            'starts_at'                     => $carbon->nextWeekday()->toDateString(),
+            'ends_at'                       => $carbon->nextWeekday()->subMonth()->toDateString(),
+        ]);
+        $request         = new StoreAppointmentRequest([
+            [
+                'appointment_to_user'     => 'kliusas@flex.com',
+                'appointment_title'       => 'Deleted',
+                'appointment_description' => 'Deleted',
+                'location'                => 'Linas M. table',
+                'related_github_issue'    => ':sadpepe:',
+                'starts_at'               => $carbon->nextWeekday()->toDateString(),
+                'ends_at'                 => $carbon->nextWeekday()->addDay()->toDateString(),
+            ]
+        ]);
+        //dd($request);
+        $controllerResponse = $this->controller->store($request, $service);
+
+        $this->assertEquals($serviceResponse, $controllerResponse);
+    }
 
     public function testShow()
     {

@@ -31,7 +31,7 @@ class RegisterTest extends TestCase
         $request->validated();
         $userRepo = new UserRepository();
         $result = $this->registerService->registerAction($request, $userRepo);
-        dd($result);
+
         $this->assertEquals(200, $result->getStatusCode());
     }
 }
